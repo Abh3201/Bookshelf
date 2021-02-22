@@ -77,17 +77,17 @@ router.post('/borrow/:id', async (req, res)=>{
     const book = await Book.findById(req.body.bookId);
 
     const user = await User.findById(req.params.id);
-
+    const _id = req.params.id;
     //Assign the user as the borrower of this book
     book.borrower = user;
-
     //save the book
     await book.save();
 
     user.borrows = book;
-
-    await user.save();
-
+    // console.log(user);
+    // console.log(book);
+    const a = await User.findOneAndUpdate({_id}, { $push : { "borrows" :{"_id" : book._id } } });
+    console.log(a)
     res.json({success: true, msg:'book borrowed'})
 })
 

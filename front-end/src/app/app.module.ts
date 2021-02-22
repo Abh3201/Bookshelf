@@ -50,8 +50,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 
 import 'hammerjs';
 
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireStorageModule } from 'angularfire2/storage';
+
 
 import { MyDashboardComponent } from './components/user_components/my-dashboard/my-dashboard.component';
 import { RegisterComponent } from './components/user_components/register/register.component';
@@ -73,7 +72,7 @@ import { environment } from '../environments/environment';
 import { ConfBorrComponent } from './components/user_components/my-dashboard/conf-borr/conf-borr.component';
 import { CollectionDashComponent } from './components/user_components/collection-dash/collection-dash.component';
 import { BookmarksDashComponent } from './components/user_components/bookmarks-dash/bookmarks-dash.component';
-import { DueDashComponent } from './components/user_components/due-dash/due-dash.component';
+// import { DueDashComponent } from './components/user_components/due-dash/due-dash.component';
 import { SuggestBookComponent } from './components/user_components/suggest-book/suggest-book.component';
 import { UnBorrowComponent } from './components/user_components/collection-dash/un-borrow/un-borrow.component';
 import { NotificationsComponent } from './components/admin_components/notifications/notifications.component';
@@ -97,7 +96,7 @@ import { UserTableComponent } from './components/admin_components/user-dash/user
     ConfBorrComponent,
     CollectionDashComponent,
     BookmarksDashComponent,
-    DueDashComponent,
+    // DueDashComponent,
     SuggestBookComponent,
     UnBorrowComponent,
     NotificationsComponent,
@@ -139,9 +138,7 @@ import { UserTableComponent } from './components/admin_components/user-dash/user
 
     NgxPaginationModule,
 
-    //Firebase stuff here
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireStorageModule,
+    
 
     HttpModule,  
     JwtModule.forRoot({

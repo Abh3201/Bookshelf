@@ -29,7 +29,7 @@ export class ConfBorrComponent implements OnInit {
     //code here to borrow the book
     //patch availability to false
     var updateBook = {
-      available: false
+      available: true
     }
     var borrowBook = {
       bookId: this.data.borBook._id
@@ -38,6 +38,7 @@ export class ConfBorrComponent implements OnInit {
     //current logged in user
     var loggedUserId = JSON.parse(localStorage.getItem("user")).id.toString();
     //update book available as false
+    
     this._bookService.borrowBook(this.data.borBook._id, updateBook).subscribe(data => {
       if (data.success) {
         //book available updated to false

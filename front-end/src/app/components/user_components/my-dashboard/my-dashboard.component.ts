@@ -4,8 +4,8 @@ import { Book } from '../../../models/Book';
 import { UserService } from '../../../services/user.service';
 import { NgFlashMessageService } from 'ng-flash-messages';
 import { MatDialog } from '@angular/material';
-
-import { ConfBorrComponent } from './conf-borr/conf-borr.component'
+import { ConfBorrComponent } from './conf-borr/conf-borr.component';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'my-dashboard',
@@ -33,6 +33,7 @@ export class MyDashboardComponent {
   constructor(private _bookService: BooksService,
               private _userSevice: UserService,
               private ngFlashMessageService: NgFlashMessageService,
+              private sanitizer: DomSanitizer,
               private dialog?: MatDialog) {
               
                 //get book data when page starts
@@ -40,6 +41,13 @@ export class MyDashboardComponent {
               console.log('cards: ', this.cards);
   }
 
+  // constructor(private sanitizer: DomSanitizer) { }
+
+  public sanitizeImageUrl(img: string): SafeUrl {
+      return this.sanitizer.bypassSecurityTrustUrl(img);
+  }
+
+  
   isMobileDashboard() {
     if (innerWidth > 960 || (innerWidth > 600 && innerWidth < 639)) {
       return false;
@@ -54,13 +62,14 @@ export class MyDashboardComponent {
       console.log('APIBooks:',this.apiBooks)
       
         dataBooks.forEach(element => {
-          console.log('databook elements: ', element.title, ',', element.available);
+          console.log('databook elements: ', element.title, ",", element.category);
           
           //if element.category === 'category' && element.available push to '#categorybook'
           //then from each #categorybook create objects and push to cards
 
-          if (element.category === "Education" && element.available) {
+          if (element.category === "Education") {
             this.EducationBooks.push(element)
+            console.log('In education add');
           } else if (element.category === "Arts-and-Music" && element.available) {
             this.AMBooks.push(element)
           } else if (element.category === "Computers-and-Tech" && element.available) {

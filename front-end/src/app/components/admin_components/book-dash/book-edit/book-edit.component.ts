@@ -4,7 +4,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { BooksService } from '../../../../services/books.service';
 
-import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from 'angularfire2/storage';
 
 import { NgFlashMessageService } from 'ng-flash-messages';
 import { Observable } from 'rxjs';
@@ -21,8 +20,7 @@ export class BookEditComponent implements OnInit {
   //ImageFile from input
   imageFile: object;
 
-  ref: AngularFireStorageReference;
-  task: AngularFireUploadTask;
+
 
   //This is the proper imageURL we should receive
   image: string = null;
@@ -35,7 +33,6 @@ export class BookEditComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private _bookService: BooksService,    
     private ngFlashMessageService: NgFlashMessageService,
-    private afStorage: AngularFireStorage,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
 
@@ -101,31 +98,7 @@ export class BookEditComponent implements OnInit {
   }
 
   uploadImage(){
-    //Firebase Image Upload
-    const file = this.imageFile;
-
-    const filePath = `test/${new Date().getTime()}_${file}`;
-      
-    const fileRef = this.afStorage.ref(filePath);   
     
-    const task = this.afStorage.upload(filePath, file);
-
-    // observe percentage changes
-    task.percentageChanges().subscribe((value) => {
-      this.uploadPercent = value.toFixed(2);
-      
-    });
-
-    // get notified when the download URL is available
-    task.snapshotChanges().pipe(
-      finalize(
-        () => {
-          this.downloadURL = fileRef.getDownloadURL();
-          this.downloadURL.subscribe(url => (this.image = url));                    
-        }
-      )
-    )
-    .subscribe()
     
   }  
 

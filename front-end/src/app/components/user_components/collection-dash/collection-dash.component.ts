@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import { BooksService } from '../../../services/books.service';
 import { MatDialog } from '@angular/material';
+import {DomSanitizer } from '@angular/platform-browser';
 
 import { UnBorrowComponent } from './un-borrow/un-borrow.component';
 
@@ -29,6 +30,7 @@ export class CollectionDashComponent {
 
   constructor(private _userService: UserService,
               private _bookService: BooksService,
+              private _DomSanitizationService: DomSanitizer,
               private dialog?: MatDialog){
     this.getUserBorrowData();
   }

@@ -17,9 +17,6 @@
       <a mat-list-item (click)="switchToBookMarks()" 
       [ngClass]="{'side-nav-active-item': (apptitle === 'Flagged Books'),
                   'side-nav-items': !(apptitle === 'Flagged Books')}"><i class="fa fa-flag" aria-hidden="true"></i>&nbsp; Bookmarks</a>
-      <a mat-list-item (click)="switchToMyDues()" 
-      [ngClass]="{'side-nav-active-item': (apptitle === 'My Dues'),
-                  'side-nav-items': !(apptitle === 'My Dues')}"><i class="fa fa-dollar" aria-hidden="true"></i>&nbsp; My Dues</a>
       <a mat-list-item (click)="switchToSuggestBook()" 
       [ngClass]="{'side-nav-active-item': (apptitle === 'Suggest A Book'),
                   'side-nav-items': !(apptitle === 'Suggest A Book')}"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>&nbsp; Suggest A Book</a>

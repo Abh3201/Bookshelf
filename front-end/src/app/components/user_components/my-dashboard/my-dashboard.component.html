@@ -12,6 +12,7 @@
                                                            currentPage: x,
                                                            totalItems: cards.length
     }" [colspan]="card.cols" [rowspan]="card.rows">
+    <div class = "mat-card-cvr">
       <mat-card class="dashboard-card">
         <mat-card-header>
           <mat-card-title>
@@ -30,21 +31,33 @@
                 <mat-card-title>{{book.title}}</mat-card-title>
                 <mat-card-subtitle>{{book.author}}</mat-card-subtitle>                
               </mat-card-header>
-              <img mat-card-sm-image src="{{book.image}}" alt="Photo of a Shiba Inu" style="height: auto;">              
+              <img mat-card-sm-image [src]= "sanitizeImageUrl(book.image)" alt="Book Cover" style="height: auto;">              
+              <!-- <img mat-card-sm-image [src]="sanitizeImageUrl(book.image)" /> -->
               <mat-card-actions>
-                <button mat-button (click)="borrowBook(book)">BORROW</button>
-                <button mat-button (click)="addToBookmarks(book)">BOOKMARK</button>                
+                <button mat-button (click)="borrowBook(book)">Buy</button>
+                <button mat-button (click)="addToBookmarks(book)">Bookmark</button>                
               </mat-card-actions>
-            </mat-card>                        
+            </mat-card>  
+                               
           </div>          
         </mat-card-content>
         <div class="book-pagination-controls">
           <!--pagination controls here-->
           <pagination-controls [id]='card.title' (pageChange)="p[card.title] = $event"></pagination-controls>
         </div>
-      </mat-card>      
+      </mat-card>
+    </div>       
     </mat-grid-tile>        
   </mat-grid-list>
+
+
+  
+
+
+
+
+
+
   <div class="card-pagination-controls">
       <!--pagination controls of cards-->
       <pagination-controls *ngIf="cards.length" id='outer-cards'(pageChange)="x = $event"></pagination-controls>

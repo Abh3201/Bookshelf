@@ -3,12 +3,20 @@ import { FormGroup } from '@angular/forms/src/model';
 import { FormBuilder } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { BooksService } from '../../../../services/books.service';
+import {UploadService} from '../../../../services/upload.service'
 import { Validators } from '@angular/forms';
 import { NgFlashMessageService } from 'ng-flash-messages';
-
-import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from 'angularfire2/storage';
 import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
+
+
+
+
+// aws.config.update({
+//   secretAccessKey: "pCyaSUPJq4+BMtzbaorBwfpOxxtCo1f1HV8hWOWc",
+//   accessKeyId: "AKIAIHU6I6EDKXHPJLWA",
+//   region: 'us-east-1' //E.g us-east-1
+//  });
+
 
 @Component({
   selector: 'app-book-dialog',
@@ -22,9 +30,6 @@ export class BookDialogComponent implements OnInit {
   //ImageFile from input
   imageFile: object;
 
-  ref: AngularFireStorageReference;
-  task: AngularFireUploadTask;
-
   //This is the proper imageURL we should receive
   image: string = null;
   
@@ -34,9 +39,9 @@ export class BookDialogComponent implements OnInit {
 
   constructor(private _formBuilder: FormBuilder,
               private dialogRef: MatDialogRef<any>,
-              private _bookService: BooksService,              
+              private _bookService: BooksService,
+              private uploadservice: UploadService,              
               private ngFlashMessageService: NgFlashMessageService,
-              private afStorage: AngularFireStorage,              
               @Inject(MAT_DIALOG_DATA) public data: any) {}
 
   onNoClick(): void{
@@ -105,40 +110,28 @@ export class BookDialogComponent implements OnInit {
 
   changeImage(event){
     //Assigns the attached image to class scope variable
-    this.imageFile = event.target.files[0];         
+    
+    this.imageFile = event.target.files[0]; 
+    var reader = new FileReader();
+            reader.onload = (event: any) => {
+                this.image = event.target.result;
+            }        
+    this.image = "https://esdbookshelf.s3.amazonaws.com/" + event.target.files[0].name;
+    console.log('Image path', event.target.files[0].name)
   }
 
   uploadImage(){
-    //Firebase Image Upload
-    const file = this.imageFile;
-
-    const filePath = `test/${new Date().getTime()}_${file}`;
-      
-    const fileRef = this.afStorage.ref(filePath);   
-    
-    const task = this.afStorage.upload(filePath, file);
-
-    // observe percentage changes
-    task.percentageChanges().subscribe((value) => {
-      this.uploadPercent = value.toFixed(2);
-      
-    });
-
-    // get notified when the download URL is available
-    task.snapshotChanges().pipe(
-      finalize(
-        () => {
-          this.downloadURL = fileRef.getDownloadURL();
-          this.downloadURL.subscribe(url => (this.image = url));                    
-        }
-      )
-    )
-    .subscribe()
-    
+    console.log(this.imageFile);
+    this.uploadservice.uploadFile(this.imageFile);
+    console.log('This is the address of file',this.image);
   }  
 
+
+
+  
   allSetToGo(){
     var flag = false;
+    console.log(this.image)
     while (this.image != null) {
       // while an imageURL is returned check if all fields are not empty
       if (this._bookForm.value.Title != '' && this._bookForm.value.Author != '') {
@@ -161,3 +154,6 @@ export class BookDialogComponent implements OnInit {
 
 
 }
+
+
+

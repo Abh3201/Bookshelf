@@ -20,6 +20,7 @@ export class BooksService {
     return this.httpClient.get(this.API_URL);
   }
 
+  
   getBookById(bookId){
     return this.http.get('http://localhost:3000/api/books/' + bookId)
       .pipe(map((res)=>res.json()));
