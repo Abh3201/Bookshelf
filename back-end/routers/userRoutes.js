@@ -9,7 +9,7 @@ var User = require('../models/users');
 var Book = require('../models/books');
 
 var userController = require('../controllers/userAPI');
-
+''
 router.post('/register', (req, res) => {
     let newUser = new User(req.body);
 
@@ -18,6 +18,7 @@ router.post('/register', (req, res) => {
             throw err;
         } else {
             res.json({success: true, msg:'user registered'});
+            res.h
         }
     });
 })

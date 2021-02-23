@@ -77,6 +77,7 @@ import { SuggestBookComponent } from './components/user_components/suggest-book/
 import { UnBorrowComponent } from './components/user_components/collection-dash/un-borrow/un-borrow.component';
 import { NotificationsComponent } from './components/admin_components/notifications/notifications.component';
 import { UserTableComponent } from './components/admin_components/user-dash/user-table/user-table.component';
+import { AfpayComponent } from './components/user_components/afpay/afpay.component';
 
 @NgModule({
   declarations: [
@@ -100,7 +101,8 @@ import { UserTableComponent } from './components/admin_components/user-dash/user
     SuggestBookComponent,
     UnBorrowComponent,
     NotificationsComponent,
-    UserTableComponent, 
+    UserTableComponent,
+    AfpayComponent, 
   ],
   imports: [
     BrowserModule,

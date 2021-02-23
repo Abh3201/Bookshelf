@@ -1,5 +1,7 @@
 const http = require('http');
 const https = require('https');
+var express = require('express');
+var router = express.Router();
 const qs = require('querystring');
 const port = 4200;
 const checksum_lib = require('./checksum.js');
@@ -10,9 +12,10 @@ var PaytmConfig = {
 	website: "WEBSTAGING"
 }
 
+router.get('/', (req, res) =>{
 
-http.createServer(function (req, res) {
 
+    console.log(req.ab);
 	switch(req.url){
 		case "/":
 			var params 						= {};
@@ -23,7 +26,7 @@ http.createServer(function (req, res) {
 			params['ORDER_ID']			= 'TEST_'  + new Date().getTime();
 			params['CUST_ID'] 			= 'Customer001';
 			params['TXN_AMOUNT']			= '1.00';
-			params['CALLBACK_URL']		= 'http://localhost:'+port+'/callback';
+			params['CALLBACK_URL']		= 'http://localhost:3000'+'/done';
 			params['EMAIL']				= 'yadavabh3202@gmail.com';
 			params['MOBILE_NO']			= '8693014671';
 			checksum_lib.genchecksum(params, PaytmConfig.key, function (err, checksum) {
@@ -128,4 +131,8 @@ http.createServer(function (req, res) {
 	}
 	
 
-}).listen(port);
+
+})	
+
+module.exports = router;
+

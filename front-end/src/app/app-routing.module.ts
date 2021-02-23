@@ -19,6 +19,7 @@ import { AdminGuard } from './guards/admin.guard';
 // import { DueDashComponent } from './components/user_components/due-dash/due-dash.component';
 import { SuggestBookComponent } from './components/user_components/suggest-book/suggest-book.component';
 import { NotificationsComponent } from './components/admin_components/notifications/notifications.component';
+import { AfpayComponent } from './components/user_components/afpay/afpay.component';
 // MDB Angular Pro
 
 const routes: Routes = [
@@ -34,6 +35,7 @@ const routes: Routes = [
   {path: 'admin-books', component: BookDashComponent},  //, canActivate:[AdminGuard]
   {path: 'admin-users', component: UserDashComponent}, //, canActivate:[AdminGuard]
   {path: 'admin-notices', component: NotificationsComponent}, //, canActivate: [AdminGuard]
+  {path: 'afpay', component: AfpayComponent}
 ];
 
 @NgModule({

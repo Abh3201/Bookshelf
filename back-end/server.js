@@ -12,6 +12,11 @@ var bookrouter = require('./routers/bookRoutes');
 // Routes for Users
 var userrouter = require('./routers/userRoutes');
 
+
+//Routes for paytm
+var paytm = require('./checksum/server');
+var done = require('./checksum/done');
+
 //Routes for Notifications
 var notifirouter = require('./routers/notificationRoutes');
 
@@ -58,7 +63,12 @@ require('./config/passport')(passport);
 app.use('/api', bookrouter);
 app.use('/user', userrouter);
 app.use('/notification', notifirouter);
+app.use('/paytm', paytm)
+app.use('/done', done)
 
+app.get('/for', function(req, res) {  
+    res.redirect('http://localhost:4200/afpay');
+});
 
 app.listen(port, function () {
     console.log('server is running on port : ' + port);

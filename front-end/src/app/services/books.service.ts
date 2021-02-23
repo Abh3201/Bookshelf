@@ -53,6 +53,11 @@ export class BooksService {
       .pipe(map((res)=>res.json()));
   }
 
+  buybook(){
+    // return this.httpClient.get('http://localhost:3000/paytm');
+    // this.httpClient.get()
+  }
+
   makeAvailable(bookId, update){
     //Make availability true and pop the borrower in books
     console.log('bookid is :', bookId);
