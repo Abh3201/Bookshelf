@@ -15,8 +15,8 @@ image : String = null;
     const contentType = file.type;
     const bucket = new S3(
           {
-              accessKeyId: 'AKIARLXQJHR5IDWYQBTV',
-              secretAccessKey: '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',
+              accessKeyId: 'AWS_ACCESS_KEY',
+              secretAccessKey: 'AWS_SECRET_KEY',
               region: 'us-east-1'
           }
       );
