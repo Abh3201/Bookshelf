@@ -1,8 +1,4 @@
 module.exports = {
-    database: 'mongodb://localhost:27017/user',
-    secret: 'yoursecret'
+    database: 'mongodb+srv://ayushtiwari20:ayushtiwari20@cluster0.ape0h.mongodb.net/mean-book-library?retryWrites=true&w=majority',
+    secret: 'bookshelf'
 }
-//for windows
-//'mongodb://localhost:27017/mean-book-library'
-//for ubuntu
-//'mongodb://admin:123@localhost:27017/mean-book-library?authSource=admin'

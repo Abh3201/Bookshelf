@@ -115,8 +115,10 @@ export class BookDialogComponent implements OnInit {
     var reader = new FileReader();
             reader.onload = (event: any) => {
                 this.image = event.target.result;
+                console.log(this.image)
             }        
-    this.image = "https://esdbookshelf.s3.amazonaws.com/" + event.target.files[0].name;
+    
+    this.image = "https://azureappdata.blob.core.windows.net/file/bookdeck/" + event.target.files[0].name;
     console.log('Image path', event.target.files[0].name)
   }
 
